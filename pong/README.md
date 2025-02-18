@@ -9,7 +9,7 @@ This is a classic arcade game recreated as part of the **20-Games Challenge**.
 - [x] **Ball Physics**
 - [x] **AI Opponent**
 - [x] **Menu System**
-- [ ] **Sound Effects**
+- [x] **Sound Effects**
 
 ## How to Play
 
@@ -29,7 +29,7 @@ make run
 ```
 
 ## Screenshots
-[images]
+![<alt-text>](images/pong.png)
 
 ## Credits
 - **Inspiration**: [The 20 Games Challenge](https://20_games_challenge.gitlab.io).

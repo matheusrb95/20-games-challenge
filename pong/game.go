@@ -31,6 +31,12 @@ func (g *Game) Update() error {
 		return ebiten.Termination
 	}
 
+	if nextSceneId == scenes.MenuSceneId {
+		if !g.sceneMap[g.activeSceneId].Loaded() {
+			g.sceneMap[g.activeSceneId].Load()
+		}
+	}
+
 	if nextSceneId != g.activeSceneId {
 		nextScene := g.sceneMap[nextSceneId]
 		if !nextScene.Loaded() {

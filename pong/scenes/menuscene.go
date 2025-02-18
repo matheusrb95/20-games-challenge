@@ -1,18 +1,29 @@
 package scenes
 
 import (
+	"bytes"
+	_ "embed"
 	"image/color"
+	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/audio"
+	"github.com/hajimehoshi/ebiten/v2/audio/mp3"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2/vector"
 	"github.com/matheusrb95/20-games-challenge/pong/constants"
 )
 
+//go:embed bgm_aware.mp3
+var bgmBytes []byte
+
 type MenuScene struct {
 	loaded bool
 	option int
+
+	audioContext *audio.Context
+	bgmPlayer    *audio.Player
 }
 
 func NewMenuScene() *MenuScene {
@@ -20,6 +31,28 @@ func NewMenuScene() *MenuScene {
 }
 
 func (m *MenuScene) Load() {
+	if bgmBytes == nil {
+		m.loaded = true
+		return
+	}
+
+	m.audioContext = audio.NewContext(constants.SampleRate)
+
+	decoded, err := mp3.DecodeWithSampleRate(constants.SampleRate, bytes.NewReader(bgmBytes))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	m.bgmPlayer, err = m.audioContext.NewPlayer(decoded)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("Sound loaded")
+
+	m.bgmPlayer.SetVolume(0.5)
+	m.bgmPlayer.Play()
+
 	m.loaded = true
 }
 
