@@ -8,7 +8,7 @@ This is a classic arcade game recreated as part of the **20-Games Challenge**.
 - [x] **Score Tracking**
 - [x] **Ball Physics**
 - [x] **AI Opponent**
-- [ ] **Menu System**
+- [x] **Menu System**
 - [ ] **Sound Effects**
 
 ## How to Play
